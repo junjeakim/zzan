@@ -1,13 +1,14 @@
 package com.example.zzan.pack;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DBUtill {
-    private static final String URL = "jdbc:mysql://localhost:3306/zzan?characterEncoding=UTF-8"; // 데이터베이스 이름을 zzan으로 설정
-    private static final String USER = "root";
-    private static final String PASSWORD = "1234";
+    private static final String URL = "jdbc:mysql://localhost:3306/zzan?characterEncoding=UTF-8"; 
+    private static final String USER = "zzan"; // 사용자 이름 수정
+    private static final String PASSWORD = "1234"; // 비밀번호 유지
 
     static {
         try {

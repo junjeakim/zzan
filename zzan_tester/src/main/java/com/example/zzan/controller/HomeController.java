@@ -129,7 +129,7 @@ public class HomeController {
         return "member/LogoutProc"; // LogoutProc.jsp를 반환
     }
 
-    // Showcase 관련 매핑
+    // 파일 삭제 처리 매핑
     @GetMapping("/showcase/deleteFile")
     public String deleteFile(@RequestParam("idx") int id, Model model) {
         boolean productDeleted = false;
