@@ -131,8 +131,35 @@ public class HomeController {
 
     // Showcase 관련 매핑
     @GetMapping("/showcase/deleteFile")
-    public String deleteFile() {
-        return "showcase/deleteFile"; // deleteFile.jsp를 반환
+    public String deleteFile(@RequestParam("idx") int id, Model model) {
+        boolean productDeleted = false;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = DBUtill.getConnection();
+            String sql = "DELETE FROM product WHERE id = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            int result = pstmt.executeUpdate();
+
+            if (result > 0) {
+                productDeleted = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtill.closePreparedStatement(pstmt);
+            DBUtill.closeConnection(conn);
+        }
+
+        if (productDeleted) {
+            model.addAttribute("message", "파일 및 제품 정보가 성공적으로 삭제되었습니다.");
+        } else {
+            model.addAttribute("message", "파일 삭제에 실패했습니다.");
+        }
+
+        return "showcase/deleteFile"; // showcase/deleteFile.jsp 반환
     }
 
     @GetMapping("/showcase/productList")
@@ -167,7 +194,7 @@ public class HomeController {
         return "admin/adminPage"; // adminPage.jsp를 반환
     }
 
- // 파일 업로드 처리 매핑
+    // 파일 업로드 처리 매핑
     @PostMapping("/uploadFile")
     public String handleFileUpload(@RequestParam("image") MultipartFile file,
                                    @RequestParam("productName") String productName,
@@ -214,7 +241,7 @@ public class HomeController {
                 if (pstmt != null) try { pstmt.close(); } catch (Exception e) { e.printStackTrace(); }
                 if (conn != null) try { conn.close(); } catch (Exception e) { e.printStackTrace(); }
             }
-//ddadaf
+
             if (isSaved) {
                 model.addAttribute("message", "파일 업로드 및 데이터 저장 성공!");
             } else {
