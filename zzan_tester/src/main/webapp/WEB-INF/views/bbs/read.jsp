@@ -88,6 +88,8 @@ Timestamp date = dto.getRegTM();
 
     </div>
     <!-- div#wrap -->
+        	<script src="/script/jquery-3.7.1.min.js"></script>
+	<script src="/script/script.js"></script>
     <script>
         let sessionId = "<%=uId_Session%>";
         if (sessionId === null || sessionId === "null") {
@@ -103,5 +105,6 @@ Timestamp date = dto.getRegTM();
             }
         });
     </script>
+
 </body>
 </html>

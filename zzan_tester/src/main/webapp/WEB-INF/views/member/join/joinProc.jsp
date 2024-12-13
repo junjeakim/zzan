@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean id="memberDto" class="com.example.zzan.dto.MemberDTO"/>
 <jsp:useBean id="dao" class="com.example.zzan.dao.MemberDAO"/>
 <%
@@ -23,10 +22,13 @@ memberDto.setmAddr(addr);
 // DAO를 통한 멤버 삽입
 boolean reChk = dao.insertMember(memberDto);
 %>
+	<script src="/script/jquery-3.7.1.min.js"></script>
+	<script src="/script/script.js"></script>
+
 <script>
 if (<%=reChk%>) {
     alert("가입되었습니다.");
-    location.href = "/member/Login.jsp";
+    location.href = "/member/Login";
 } else {
     alert("실패");
     history.back();

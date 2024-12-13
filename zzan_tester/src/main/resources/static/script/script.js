@@ -68,3 +68,13 @@ function goAdmin() {
 function read(idx){
     location.href = "/bbs/read?idx=" + idx;
 }
+
+// 추가 삭제식
+function deleteProduct(productId) {
+    if (confirm("정말 삭제하시겠습니까?")) {
+        location.href = "/showcase/deleteFile?idx=" + productId;
+    }
+}
+
+
+

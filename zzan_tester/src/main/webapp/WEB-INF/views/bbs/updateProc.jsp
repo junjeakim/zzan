@@ -11,6 +11,8 @@ String content = request.getParameter("content");
 
 boolean reChk = dao.updateContent(idx, title, content);
 %>
+<script src="/script/jquery-3.7.1.min.js"></script> 
+<script src="/script/script.js"></script>
 <script>
  if(<%=reChk%>){
     alert("수정되었습니다.");

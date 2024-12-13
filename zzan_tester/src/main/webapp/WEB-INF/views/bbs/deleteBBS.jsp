@@ -8,6 +8,8 @@ int idx = Integer.parseInt(request.getParameter("idx"));
 
 boolean reChk = dao.deleteBBS(idx);
 %>
+	<script src="/script/jquery-3.7.1.min.js"></script>
+	<script src="/script/script.js"></script>
 <script>
 if(<%= reChk %>){
     alert("삭제되었습니다.");
@@ -17,3 +19,4 @@ if(<%= reChk %>){
     history.back();
 }
 </script>
+

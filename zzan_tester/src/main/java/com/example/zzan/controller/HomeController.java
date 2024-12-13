@@ -14,6 +14,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.UUID;
 
+import com.example.zzan.dao.MemberDAO;
+import com.example.zzan.dto.MemberDTO;
 import com.example.zzan.pack.DBUtill;
 
 @Controller
@@ -129,6 +131,38 @@ public class HomeController {
         return "member/LogoutProc"; // LogoutProc.jsp를 반환
     }
 
+    // 회원가입 처리 매핑
+    @PostMapping("/member/join/joinProc")
+    public String joinProc(@RequestParam("mId") String id,
+                           @RequestParam("mPw") String pw,
+                           @RequestParam("mName") String name,
+                           @RequestParam("mEmail") String email,
+                           @RequestParam("mEmail2") String email2,
+                           @RequestParam("mBirthday") String birthday,
+                           @RequestParam("mPhone") String phone,
+                           @RequestParam("mAddr") String addr,
+                           Model model) {
+        MemberDTO memberDto = new MemberDTO();
+        memberDto.setmId(id);
+        memberDto.setmPw(pw);
+        memberDto.setmName(name);
+        memberDto.setmEmail(email + "@" + email2);
+        memberDto.setmBirthday(birthday);
+        memberDto.setmPhone(phone);
+        memberDto.setmAddr(addr);
+
+        MemberDAO dao = new MemberDAO();
+        boolean reChk = dao.insertMember(memberDto);
+
+        if (reChk) {
+            model.addAttribute("message", "회원가입이 완료되었습니다!");
+            return "redirect:/member/Login"; // 로그인 페이지로 리다이렉트
+        } else {
+            model.addAttribute("message", "회원가입에 실패하였습니다. 다시 시도해주세요.");
+            return "redirect:/member/join/member_join"; // 회원가입 페이지로 리다이렉트
+        }
+    }
+
     // 파일 삭제 처리 매핑
     @GetMapping("/showcase/deleteFile")
     public String deleteFile(@RequestParam("idx") int id, Model model) {
@@ -159,7 +193,7 @@ public class HomeController {
             model.addAttribute("message", "파일 삭제에 실패했습니다.");
         }
 
-        return "showcase/deleteFile"; // showcase/deleteFile.jsp 반환
+        return "redirect:/showcase/productList"; // 제품 목록 페이지로 리다이렉트
     }
 
     @GetMapping("/showcase/productList")
@@ -170,28 +204,6 @@ public class HomeController {
     @GetMapping("/showcase/register")
     public String register() {
         return "showcase/register"; // register.jsp를 반환
-    }
-
-    // 추가된 Showcase 관련 매핑
-    @GetMapping("/showcase/uploadResult")
-    public String uploadResult() {
-        return "showcase/uploadResult"; // uploadResult.jsp를 반환
-    }
-
-    // Admin 관련 매핑
-    @GetMapping("/admin/adminLogin")
-    public String adminLogin() {
-        return "admin/adminLogin"; // adminLogin.jsp를 반환
-    }
-
-    @GetMapping("/admin/ad_LoginProc")
-    public String adLoginProc() {
-        return "admin/ad_LoginProc"; // ad_LoginProc.jsp를 반환
-    }
-
-    @GetMapping("/admin/adminPage")
-    public String adminPage() {
-        return "admin/adminPage"; // adminPage.jsp를 반환
     }
 
     // 파일 업로드 처리 매핑
@@ -207,7 +219,7 @@ public class HomeController {
             return "showcase/register";
         }
 
-        String fileStorage = "C:/path/to/images/"; // 실제 파일 저장 경로로 수정
+        String fileStorage = "src/main/resources/static/images/"; // 실제 파일 저장 경로로 수정
         File directory = new File(fileStorage);
         if (!directory.exists()) {
             directory.mkdirs(); // 경로가 존재하지 않으면 생성
@@ -231,15 +243,15 @@ public class HomeController {
                 pstmt.setString(1, productName);
                 pstmt.setString(2, price);
                 pstmt.setString(3, description);
-                pstmt.setString(4, "images/" + upFileName);
+                pstmt.setString(4, upFileName); // 저장된 파일명만 저장
                 pstmt.setString(5, category);
                 pstmt.executeUpdate();
                 isSaved = true;
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                if (pstmt != null) try { pstmt.close(); } catch (Exception e) { e.printStackTrace(); }
-                if (conn != null) try { conn.close(); } catch (Exception e) { e.printStackTrace(); }
+                DBUtill.closePreparedStatement(pstmt);
+                DBUtill.closeConnection(conn);
             }
 
             if (isSaved) {
@@ -253,6 +265,6 @@ public class HomeController {
             model.addAttribute("message", "파일 업로드 중 오류가 발생했습니다: " + e.getMessage());
         }
 
-        return "showcase/uploadResult"; // uploadResult.jsp를 반환
+        return "redirect:/showcase/productList"; // 제품 목록 페이지로 리다이렉트
     }
 }

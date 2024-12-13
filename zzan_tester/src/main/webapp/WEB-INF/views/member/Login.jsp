@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -43,7 +42,7 @@
                             <!-- 회원가입 및 아이디/비밀번호 찾기 링크 -->
                             <div class="login_bottom clfix">
                                 <p>
-                                    <a href="#">회원가입</a> | <a href="#">아이디/비밀번호 찾기</a>
+                                    <a href="/member/join/member_join.jsp">회원가입</a> | <a href="#">아이디/비밀번호 찾기</a>
                                 </p>
                             </div>
                         </div>

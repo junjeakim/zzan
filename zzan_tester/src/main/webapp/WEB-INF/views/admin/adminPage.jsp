@@ -24,6 +24,7 @@
 		</div>
 		<main id="main"></main>
 	</div>
-
+	<script src="/script/jquery-3.7.1.min.js"></script>
+	<script src="/script/script.js"></script>
 </body>
 </html>

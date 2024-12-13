@@ -28,6 +28,8 @@
             loginSuccess = true;
             session.setAttribute("userId", userId);
 %>
+<script src="/script/jquery-3.7.1.min.js"></script>
+<script src="/script/script.js"></script>
 <script>
     location.href = "/index.jsp";
 </script>
@@ -43,3 +45,4 @@
         if (conn != null) try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
     }
 %>
+	

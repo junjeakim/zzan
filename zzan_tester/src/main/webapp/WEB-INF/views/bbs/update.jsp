@@ -93,6 +93,9 @@ Timestamp date = dto.getRegTM();
     </div>
     <!-- div#wrap -->
     
+    	<script src="/script/jquery-3.7.1.min.js"></script>
+	<script src="/script/script.js"></script>
+    
 <script>
 document.querySelector("#delBtn").addEventListener("click", function(){
     let deletChk = confirm("삭제하시겠습니까?");
@@ -101,5 +104,7 @@ document.querySelector("#delBtn").addEventListener("click", function(){
     }
 });
 </script>
+
+
 </body>
 </html>

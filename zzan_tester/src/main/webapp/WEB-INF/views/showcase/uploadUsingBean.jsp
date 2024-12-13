@@ -85,7 +85,8 @@
         %>
         <br>
     </div>
-    <script src="../script/jquery-3.7.1.min.js"></script>
+    	<script src="/script/jquery-3.7.1.min.js"></script>
+	<script src="/script/script.js"></script>
     <script>
         function deleteFile(fileName) {
             if (confirm("파일을 정말 삭제하시겠습니까?")) {

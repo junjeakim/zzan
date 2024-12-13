@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,9 +12,9 @@
 <body>
     <div id="wrap">
         <!-- 헤더 템플릿 포함 -->
-        <%@ include file="/WEB-INF/views/ind/header.jsp" %> <!-- 헤더 include 경로 수정 -->
+        <%@ include file="/WEB-INF/views/ind/header.jsp" %>
         <div class="join_area">
-            <form name="form" action="/member/join/joinProc.jsp" method="post" onsubmit="return validateForm()">
+            <form name="form" action="/member/join/joinProc" method="post" onsubmit="return validateForm()">
                 <h1>회원가입</h1>
                 <h2><span style="color:#ff0000;">*</span>회원정보</h2>
                 
@@ -92,7 +91,7 @@
         <jsp:include page="/WEB-INF/views/ind/footer.jsp"/> <!-- 푸터 include 경로 수정 -->
     </div>
     
-        <script>
+    <script>
     // 여기에 validateForm 함수를 추가 유효성검사는 삭제해도 넣어도 상관없음 겹치지만 않는다면야
         
 function validateForm() {

@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <jsp:useBean id="admin" class="com.example.zzan.dto.adminBean"/>
 <jsp:useBean id="dao" class="com.example.zzan.dao.adminDAO"/>
+<script src="/script/jquery-3.7.1.min.js"></script>
+	<script src="/script/script.js"></script>
 <script>
 <%
 request.setCharacterEncoding("UTF-8");
@@ -19,3 +21,4 @@ if(chk){%>
 	history.back();
 <%}%>
 </script>
+	
